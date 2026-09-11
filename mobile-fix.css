@@ -1,146 +1,204 @@
-/* Ajustes finais do hero: personagem integrada ao lado direito, sem caixa aparente */
+/* Hero cyber: a personagem fica fixa na viewport; a pagina e os elementos rolam por cima. */
+
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero {
+  overflow: visible !important;
+}
+
+/* Mantem todo conteudo acima da personagem. */
+.section > *:not(.hero-art):not(.hero-grid) {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-grid {
+  z-index: -1;
+}
+
+/* A imagem nao acompanha o scroll. */
+.hero-art {
+  position: fixed !important;
+  top: 72px !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  width: 52vw !important;
+  height: calc(100svh - 72px) !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  transform: none !important;
+  z-index: 1 !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  right: 2vw;
+  bottom: 4vh;
+  width: min(44vw, 700px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(143,92,255,.14), transparent 68%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+/* Mostra a arte inteira, sem crop e sem animacao/flutuacao. */
+.hero-art img {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  opacity: 1 !important;
+  transform: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: drop-shadow(-24px 30px 60px rgba(0,0,0,.58));
+  z-index: 2 !important;
+}
+
+/* Os enfeites antigos nao cobrem a arte. O conteudo real da pagina pode cobri-la. */
+.hero-art .art-orbit,
+.hero-art .hud {
+  display: none !important;
+}
+
+/* Terminal volta ao fluxo normal e pode passar por cima da imagem durante o scroll. */
+.terminal-card {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  z-index: 4 !important;
+}
 
 @media (min-width: 1001px) {
+  .hero-copy {
+    position: relative;
+    z-index: 4;
+    width: min(52vw, 820px);
+  }
+
+  .terminal-card {
+    width: min(430px, 40vw) !important;
+    margin-top: 34px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    display: block !important;
+    min-height: 110svh;
+    padding-right: 6vw !important;
+  }
+
+  .hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+    padding-right: 0 !important;
+  }
+
   .hero-art {
-    background: linear-gradient(90deg, transparent 0%, rgba(13,12,10,.45) 18%, #0d0c0a 58%, #0d0c0a 100%);
+    top: 64px !important;
+    width: 72vw !important;
+    height: calc(100svh - 64px) !important;
   }
 
   .hero-art img {
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
-    mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .terminal-card {
+    width: min(520px, 100%) !important;
+    margin-top: 42px !important;
   }
 }
 
 @media (max-width: 620px) {
-  .hero {
-    position: relative;
-    display: block;
-    min-height: calc(100svh + 285px);
-    padding: 96px 18px 285px;
-    overflow: hidden;
+  .topbar {
+    z-index: 100 !important;
   }
 
-  .hero-grid {
-    opacity: .52;
+  .hero {
+    min-height: 118svh;
+    padding: 96px 18px 80px !important;
   }
 
   .hero-copy {
-    position: relative;
-    z-index: 4;
-    width: 49vw;
-    max-width: 49vw;
-    padding: 14px 0 0;
-    margin: 0;
-  }
-
-  .eyebrow {
-    font-size: 8px;
-    letter-spacing: .12em;
-    white-space: nowrap;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px 0 0 !important;
   }
 
   .hero h1 {
-    font-size: 14.5vw;
-    line-height: .82;
-    letter-spacing: -.065em;
-    margin: 24px 0 24px;
+    font-size: 18vw !important;
+    line-height: .82 !important;
+    margin: 22px 0 24px !important;
   }
 
   .hero-role {
-    max-width: 47vw;
-    font-size: 7.5px;
-    line-height: 1.75;
-    letter-spacing: .02em;
-  }
-
-  .hero-role span {
-    margin: 0 4px;
+    max-width: 88vw !important;
   }
 
   .hero-text {
-    max-width: 47vw;
-    margin: 18px 0 22px;
-    font-size: 12px;
-    line-height: 1.55;
+    max-width: 82vw !important;
   }
 
-  .hero-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 9px;
-  }
-
-  .hero-actions .btn {
-    padding: 11px 13px;
-    gap: 12px;
-    font-size: 8.5px;
-    white-space: nowrap;
-  }
-
-  /* A arte ocupa a lateral direita da primeira tela inteira.
-     O fade elimina a borda/caixa escura do PNG. */
+  /* No celular ela continua fixa, inteira e ancorada no canto inferior direito. */
   .hero-art {
-    position: absolute;
-    z-index: 2;
-    top: 64px;
-    right: 0;
-    bottom: auto;
-    width: 58vw;
-    height: calc(100svh - 64px);
-    min-height: 0;
-    margin: 0;
-    opacity: 1;
-    overflow: hidden;
-    background: #0d0c0a;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.72) 16%, #000 31%, #000 100%);
-    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.72) 16%, #000 31%, #000 100%);
+    top: 64px !important;
+    right: 0 !important;
+    width: 92vw !important;
+    height: calc(100svh - 64px) !important;
   }
 
   .hero-art::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: auto;
-    height: auto;
-    right: auto;
-    bottom: auto;
-    aspect-ratio: auto;
-    border-radius: 0;
-    filter: none;
-    background: linear-gradient(90deg, rgba(7,7,9,0) 0%, rgba(13,12,10,.82) 28%, #0d0c0a 100%);
-    z-index: 0;
+    right: -16vw;
+    bottom: 2vh;
+    width: 92vw;
   }
 
   .hero-art img {
-    position: absolute;
-    z-index: 2;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    object-fit: cover;
-    object-position: 39% center;
-    transform: none;
-    filter: drop-shadow(-16px 24px 38px rgba(0,0,0,.5));
+    right: 0 !important;
+    bottom: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 92vw !important;
+    max-height: calc(100svh - 64px) !important;
   }
 
-  .hero-art .art-orbit,
-  .hero-art .hud {
-    display: none;
+  .hero-actions {
+    position: relative;
+    z-index: 5;
   }
 
-  /* O terminal fica abaixo da primeira dobra e nunca por cima da personagem. */
   .terminal-card {
-    position: absolute;
-    z-index: 4;
-    top: calc(100svh + 22px);
-    left: 18px;
-    right: 18px;
-    bottom: auto;
-    width: auto;
-    margin: 0;
+    width: 100% !important;
+    margin-top: 56px !important;
+    background: rgba(9,9,13,.82) !important;
+    backdrop-filter: blur(8px);
   }
 
   .terminal-body {
@@ -149,25 +207,6 @@
   }
 
   .scroll-cue {
-    display: none;
-  }
-}
-
-@media (max-width: 390px) {
-  .hero-copy {
-    width: 50vw;
-    max-width: 50vw;
-  }
-
-  .hero h1 {
-    font-size: 14vw;
-  }
-
-  .hero-text {
-    font-size: 11px;
-  }
-
-  .hero-art {
-    width: 59vw;
+    display: none !important;
   }
 }
