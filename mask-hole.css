@@ -1,47 +1,82 @@
-/* Texto-máscara: no hover, os títulos viram recortes que revelam GirlPortrait.jpeg.
-   A imagem usa coordenadas fixas da viewport para parecer uma camada atrás da interface. */
+/*
+ * Efeito "buraco/máscara" dos títulos.
+ * Desktop: a segunda imagem aparece quando o ponteiro passa sobre o título.
+ * Mobile/touch: como não existe hover real, a máscara fica ativa por padrão.
+ */
+
+:root {
+  --mask-art: url("assets/GirlPortrait.jpeg");
+}
 
 .mask-hole {
   position: relative;
   transition: color .28s ease, text-shadow .28s ease, -webkit-text-stroke .28s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .mask-hole:hover,
-  .mask-hole:hover span {
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    background-image: url("assets/GirlPortrait.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    -webkit-background-clip: text;
-    background-clip: text;
-    text-shadow: none !important;
-    -webkit-text-stroke: 1px rgba(255,255,255,.12);
+/* Estilo que transforma os glifos numa janela para a segunda imagem. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  @media (hover: hover) and (pointer: fine) {
+    .mask-hole:hover,
+    .mask-hole:hover > span {
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      background-image: var(--mask-art);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: none !important;
+      -webkit-text-stroke: 1px rgba(255,255,255,.14);
+    }
+
+    .glitch.mask-hole:hover::before,
+    .glitch.mask-hole:hover::after {
+      opacity: 0 !important;
+    }
   }
 
-  /* O glitch colorido não deve cobrir o recorte da imagem. */
-  .glitch.mask-hole:hover::before,
-  .glitch.mask-hole:hover::after {
-    opacity: 0 !important;
+  /* Celular/tablet: não depende de :hover, então o recorte continua visível. */
+  @media (hover: none), (pointer: coarse) {
+    .mask-hole,
+    .mask-hole > span {
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      background-image: var(--mask-art);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center 28%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: none !important;
+      -webkit-text-stroke: .7px rgba(255,255,255,.13);
+    }
+
+    .glitch.mask-hole::before,
+    .glitch.mask-hole::after {
+      opacity: 0 !important;
+    }
   }
 }
 
-/* Mantém o efeito limpo nos títulos grandes. */
+/* Evita que estilos antigos dos spans pintem por cima do recorte. */
 .hero h1 .mask-hole,
 .section-heading h2.mask-hole,
-.contact h2.mask-hole {
-  will-change: color, background-position;
+.contact h2.mask-hole,
+.section-heading h2.mask-hole > span,
+.contact h2.mask-hole > span {
+  background-color: transparent;
 }
 
-/* Fallback: em navegadores sem background-clip:text o texto continua normal. */
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .mask-hole:hover,
-  .mask-hole:hover span {
-    color: inherit !important;
-    -webkit-text-fill-color: currentColor !important;
-    background: none !important;
+/* Não altera layout nem transforma o título em botão/click. */
+.mask-hole {
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask-hole {
+    transition: none;
   }
 }
