@@ -31,8 +31,8 @@ main,
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;
-  height: 100svh !important;
-  min-height: 100svh !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
   margin: 0 !important;
   display: block !important;
   overflow: hidden !important;
@@ -52,16 +52,19 @@ main,
   display: none !important;
 }
 
-/* Preenche a tela inteira. Mantem a personagem priorizada no lado direito. */
+/* Base da imagem: fixa e visivel por inteiro. */
 .hero-art img {
   position: absolute !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100svh !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  width: auto !important;
+  height: 100vh !important;
   max-width: none !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  object-position: 68% center !important;
+  max-height: 100vh !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
   opacity: 1 !important;
   transform: none !important;
   -webkit-mask-image: none !important;
@@ -70,14 +73,14 @@ main,
   z-index: 1 !important;
 }
 
-/* Leve sombra lateral para o texto continuar legivel sem esconder a imagem. */
+/* Sombra lateral leve para leitura, sem esconder a arte. */
 .hero-art::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(7,7,9,.82) 0%, rgba(7,7,9,.48) 32%, rgba(7,7,9,.10) 58%, rgba(7,7,9,0) 78%);
+  background: linear-gradient(90deg, rgba(7,7,9,.78) 0%, rgba(7,7,9,.42) 30%, rgba(7,7,9,.08) 55%, rgba(7,7,9,0) 72%);
 }
 
 .hero-copy {
@@ -101,18 +104,31 @@ main,
   background: rgba(7,7,9,.16);
 }
 
+/* DESKTOP: a imagem usa a altura inteira da TELA DO SITE, sem crop. */
 @media (min-width: 1001px) {
-  .hero-copy {
-    width: min(52vw, 820px);
-  }
-
-  .terminal-card {
-    width: min(430px, 40vw) !important;
-    margin-top: 34px !important;
+  .hero-art {
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   .hero-art img {
-    object-position: 72% center !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    width: auto !important;
+    max-height: 100vh !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    object-position: right bottom !important;
+  }
+
+  .hero-copy {
+    width: min(58vw, 900px);
+  }
+
+  .terminal-card {
+    width: min(470px, 42vw) !important;
+    margin-top: 34px !important;
   }
 }
 
@@ -139,7 +155,8 @@ main,
   }
 
   .hero-art img {
-    object-position: 66% center !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
   }
 }
 
@@ -179,10 +196,13 @@ main,
   }
 
   .hero-art img {
-    width: 100vw !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: auto !important;
     height: 100svh !important;
-    object-fit: cover !important;
-    object-position: 64% center !important;
+    max-width: none !important;
+    max-height: 100svh !important;
+    object-fit: contain !important;
   }
 
   .hero-art::after {
