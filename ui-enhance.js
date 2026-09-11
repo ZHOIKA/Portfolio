@@ -3,12 +3,6 @@
   const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
   const maskTitles = [...document.querySelectorAll('.mask-hole')];
 
-  const progress = document.createElement('div');
-  progress.className = 'scroll-progress';
-  progress.innerHTML = '<i></i>';
-  document.body.appendChild(progress);
-  const progressBar = progress.querySelector('i');
-
   const rail = document.createElement('nav');
   rail.className = 'section-rail';
   rail.setAttribute('aria-label', 'Navegação rápida');
@@ -26,12 +20,6 @@
   function setActive(id) {
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
     railLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
-  }
-
-  function updateProgress() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const value = max > 0 ? (window.scrollY / max) * 100 : 0;
-    progressBar.style.width = `${Math.min(100, Math.max(0, value))}%`;
   }
 
   function updateMaskScroll() {
@@ -52,7 +40,6 @@
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      updateProgress();
       updateMaskScroll();
       ticking = false;
     });
@@ -70,13 +57,9 @@
 
   sections.forEach(section => observer.observe(section));
   setActive(sections[0]?.id || 'home');
-  updateProgress();
   updateMaskScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => {
-    updateProgress();
-    updateMaskScroll();
-  });
+  window.addEventListener('resize', updateMaskScroll);
 
   // Pequeno efeito de foco nos cards, sem atrapalhar touch/mobile.
   if (matchMedia('(pointer:fine)').matches) {
