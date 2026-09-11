@@ -1,0 +1,47 @@
+/* Texto-máscara: no hover, os títulos viram recortes que revelam GirlPortrait.jpeg.
+   A imagem usa coordenadas fixas da viewport para parecer uma camada atrás da interface. */
+
+.mask-hole {
+  position: relative;
+  transition: color .28s ease, text-shadow .28s ease, -webkit-text-stroke .28s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mask-hole:hover,
+  .mask-hole:hover span {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: url("assets/GirlPortrait.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: none !important;
+    -webkit-text-stroke: 1px rgba(255,255,255,.12);
+  }
+
+  /* O glitch colorido não deve cobrir o recorte da imagem. */
+  .glitch.mask-hole:hover::before,
+  .glitch.mask-hole:hover::after {
+    opacity: 0 !important;
+  }
+}
+
+/* Mantém o efeito limpo nos títulos grandes. */
+.hero h1 .mask-hole,
+.section-heading h2.mask-hole,
+.contact h2.mask-hole {
+  will-change: color, background-position;
+}
+
+/* Fallback: em navegadores sem background-clip:text o texto continua normal. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .mask-hole:hover,
+  .mask-hole:hover span {
+    color: inherit !important;
+    -webkit-text-fill-color: currentColor !important;
+    background: none !important;
+  }
+}
