@@ -1,125 +1,126 @@
-/* Hero cyber: a personagem ocupa a viewport inteira e fica fixa enquanto o conteudo rola por cima. */
+/* Global cyber background: the cyborg stays fixed for the ENTIRE site.
+   All sections scroll above it. */
+
+html,
+body {
+  min-height: 100%;
+  background: #070709;
+}
 
 body {
   position: relative;
   isolation: isolate;
 }
 
+/* The artwork is now global instead of being trapped inside the hero section. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("assets/cyborg.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100vh;
+}
+
+/* Dark fade only on the left so text stays readable. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(7,7,9,.96) 0%,
+    rgba(7,7,9,.82) 28%,
+    rgba(7,7,9,.38) 52%,
+    rgba(7,7,9,.08) 72%,
+    rgba(7,7,9,0) 100%
+  );
+}
+
+/* Real page content always stays above the fixed image. */
+.topbar,
 main,
-.section {
+footer {
   position: relative;
+  z-index: 3;
+}
+
+.noise,
+.scanlines,
+.cursor-dot,
+.cursor-ring,
+.boot-screen {
+  z-index: 9997;
+}
+
+.topbar {
+  z-index: 100;
+}
+
+.boot-screen {
+  z-index: 9998;
+}
+
+.cursor-dot,
+.cursor-ring {
+  z-index: 9999;
+}
+
+/* The old image element is disabled because the global background replaces it. */
+.hero-art {
+  display: none !important;
 }
 
 .hero {
   overflow: visible !important;
+  background: transparent !important;
 }
 
-/* Todo o conteudo real da pagina fica acima da arte. */
-.section > *:not(.hero-art):not(.hero-grid) {
+.hero-grid {
+  z-index: 0;
+  opacity: .35;
+  pointer-events: none;
+}
+
+.section {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+}
+
+.section:not(.hero) {
+  background: rgba(7,7,9,.10) !important;
+}
+
+.hero-copy,
+.terminal-card,
+.section-heading,
+.about-grid,
+.project-grid,
+.skills-layout,
+.contact-inner,
+.big-code {
   position: relative;
   z-index: 4;
 }
 
-.hero-grid {
-  z-index: 2;
-  opacity: .45;
-  pointer-events: none;
-}
-
-/* A arte vira uma camada fixa de tela cheia. */
-.hero-art {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  min-height: 100vh !important;
-  margin: 0 !important;
-  display: block !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  opacity: 1 !important;
-  background: transparent !important;
-  transform: none !important;
-  z-index: 1 !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-}
-
-/* Sem circulos, HUD ou qualquer enfeite cobrindo a personagem. */
-.hero-art::before,
-.hero-art .art-orbit,
-.hero-art .hud {
-  display: none !important;
-}
-
-/* Base da imagem: fixa e visivel por inteiro. */
-.hero-art img {
-  position: absolute !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  top: auto !important;
-  left: auto !important;
-  width: auto !important;
-  height: 100vh !important;
-  max-width: none !important;
-  max-height: 100vh !important;
-  object-fit: contain !important;
-  object-position: right bottom !important;
-  opacity: 1 !important;
-  transform: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  filter: none !important;
-  z-index: 1 !important;
-}
-
-/* Sombra lateral leve para leitura, sem esconder a arte. */
-.hero-art::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(7,7,9,.78) 0%, rgba(7,7,9,.42) 30%, rgba(7,7,9,.08) 55%, rgba(7,7,9,0) 72%);
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 5 !important;
-}
-
-.terminal-card {
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: auto !important;
-  z-index: 5 !important;
-  background: rgba(9,9,13,.78) !important;
+.terminal-card,
+.panel,
+.project-card {
+  background-color: rgba(9,9,13,.78) !important;
   backdrop-filter: blur(8px);
 }
 
-/* As demais secoes permanecem transparentes para a arte continuar visivel no scroll. */
-.section:not(.hero) {
-  background: rgba(7,7,9,.16);
-}
-
-/* DESKTOP: a imagem usa a altura inteira da TELA DO SITE, sem crop. */
 @media (min-width: 1001px) {
-  .hero-art {
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
-  .hero-art img {
-    right: 0 !important;
-    bottom: 0 !important;
-    height: 100vh !important;
-    width: auto !important;
-    max-height: 100vh !important;
-    max-width: none !important;
-    object-fit: contain !important;
-    object-position: right bottom !important;
+  /* Full image visible from top to bottom on desktop, anchored to the right. */
+  body::before {
+    background-size: auto 100vh;
+    background-position: right center;
   }
 
   .hero-copy {
@@ -137,36 +138,56 @@ main,
     cursor: auto;
   }
 
+  body::before {
+    background-size: auto 100svh;
+    background-position: 76% center;
+  }
+
+  body::after {
+    background: linear-gradient(
+      90deg,
+      rgba(7,7,9,.90) 0%,
+      rgba(7,7,9,.70) 35%,
+      rgba(7,7,9,.24) 65%,
+      rgba(7,7,9,0) 100%
+    );
+  }
+
   .hero {
     display: block !important;
-    min-height: 110svh;
+    min-height: 100svh;
     padding-right: 6vw !important;
   }
 
   .hero-copy {
     width: 100% !important;
     max-width: none !important;
-    padding-right: 0 !important;
   }
 
   .terminal-card {
     width: min(520px, 100%) !important;
     margin-top: 42px !important;
   }
-
-  .hero-art img {
-    height: 100svh !important;
-    max-height: 100svh !important;
-  }
 }
 
 @media (max-width: 620px) {
-  .topbar {
-    z-index: 100 !important;
+  body::before {
+    background-size: auto 100svh;
+    background-position: 70% center;
+  }
+
+  body::after {
+    background: linear-gradient(
+      90deg,
+      rgba(7,7,9,.86) 0%,
+      rgba(7,7,9,.64) 42%,
+      rgba(7,7,9,.18) 72%,
+      rgba(7,7,9,0) 100%
+    );
   }
 
   .hero {
-    min-height: 118svh;
+    min-height: 100svh;
     padding: 96px 18px 80px !important;
   }
 
@@ -188,30 +209,6 @@ main,
 
   .hero-text {
     max-width: 82vw !important;
-  }
-
-  .hero-art {
-    width: 100vw !important;
-    height: 100svh !important;
-  }
-
-  .hero-art img {
-    right: 0 !important;
-    bottom: 0 !important;
-    width: auto !important;
-    height: 100svh !important;
-    max-width: none !important;
-    max-height: 100svh !important;
-    object-fit: contain !important;
-  }
-
-  .hero-art::after {
-    background: linear-gradient(90deg, rgba(7,7,9,.78) 0%, rgba(7,7,9,.45) 36%, rgba(7,7,9,.08) 66%, rgba(7,7,9,0) 88%);
-  }
-
-  .hero-actions {
-    position: relative;
-    z-index: 6;
   }
 
   .terminal-card {
