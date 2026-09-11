@@ -1,0 +1,173 @@
+/* Ajustes finais do hero: personagem integrada ao lado direito, sem caixa aparente */
+
+@media (min-width: 1001px) {
+  .hero-art {
+    background: linear-gradient(90deg, transparent 0%, rgba(13,12,10,.45) 18%, #0d0c0a 58%, #0d0c0a 100%);
+  }
+
+  .hero-art img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    position: relative;
+    display: block;
+    min-height: calc(100svh + 285px);
+    padding: 96px 18px 285px;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    opacity: .52;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 4;
+    width: 49vw;
+    max-width: 49vw;
+    padding: 14px 0 0;
+    margin: 0;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+
+  .hero h1 {
+    font-size: 14.5vw;
+    line-height: .82;
+    letter-spacing: -.065em;
+    margin: 24px 0 24px;
+  }
+
+  .hero-role {
+    max-width: 47vw;
+    font-size: 7.5px;
+    line-height: 1.75;
+    letter-spacing: .02em;
+  }
+
+  .hero-role span {
+    margin: 0 4px;
+  }
+
+  .hero-text {
+    max-width: 47vw;
+    margin: 18px 0 22px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .hero-actions .btn {
+    padding: 11px 13px;
+    gap: 12px;
+    font-size: 8.5px;
+    white-space: nowrap;
+  }
+
+  /* A arte ocupa a lateral direita da primeira tela inteira.
+     O fade elimina a borda/caixa escura do PNG. */
+  .hero-art {
+    position: absolute;
+    z-index: 2;
+    top: 64px;
+    right: 0;
+    bottom: auto;
+    width: 58vw;
+    height: calc(100svh - 64px);
+    min-height: 0;
+    margin: 0;
+    opacity: 1;
+    overflow: hidden;
+    background: #0d0c0a;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.72) 16%, #000 31%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.72) 16%, #000 31%, #000 100%);
+  }
+
+  .hero-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    right: auto;
+    bottom: auto;
+    aspect-ratio: auto;
+    border-radius: 0;
+    filter: none;
+    background: linear-gradient(90deg, rgba(7,7,9,0) 0%, rgba(13,12,10,.82) 28%, #0d0c0a 100%);
+    z-index: 0;
+  }
+
+  .hero-art img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: 39% center;
+    transform: none;
+    filter: drop-shadow(-16px 24px 38px rgba(0,0,0,.5));
+  }
+
+  .hero-art .art-orbit,
+  .hero-art .hud {
+    display: none;
+  }
+
+  /* O terminal fica abaixo da primeira dobra e nunca por cima da personagem. */
+  .terminal-card {
+    position: absolute;
+    z-index: 4;
+    top: calc(100svh + 22px);
+    left: 18px;
+    right: 18px;
+    bottom: auto;
+    width: auto;
+    margin: 0;
+  }
+
+  .terminal-body {
+    min-height: 142px;
+    font-size: 10px;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-copy {
+    width: 50vw;
+    max-width: 50vw;
+  }
+
+  .hero h1 {
+    font-size: 14vw;
+  }
+
+  .hero-text {
+    font-size: 11px;
+  }
+
+  .hero-art {
+    width: 59vw;
+  }
+}
