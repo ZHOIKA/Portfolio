@@ -1,7 +1,8 @@
 /*
  * Efeito "buraco/máscara" dos títulos.
- * Desktop: a segunda imagem aparece quando o ponteiro passa sobre o título.
- * Mobile/touch: como não existe hover real, a máscara fica ativa por padrão.
+ * A GirlPortrait.jpeg acompanha cada título durante o scroll, em vez de ficar presa à viewport.
+ * Desktop: aparece no hover.
+ * Mobile/touch: fica ativa por padrão.
  */
 
 :root {
@@ -23,8 +24,8 @@
       background-image: var(--mask-art);
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center center;
-      background-attachment: fixed;
+      background-position: center 28%;
+      background-attachment: scroll;
       -webkit-background-clip: text;
       background-clip: text;
       text-shadow: none !important;
@@ -47,6 +48,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center 28%;
+      background-attachment: scroll;
       -webkit-background-clip: text;
       background-clip: text;
       text-shadow: none !important;
