@@ -1,16 +1,22 @@
-/* Ajuste sutil de contraste: escurece a arte fixa sem apagar os detalhes. */
-.hero-art::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  display: block !important;
-  pointer-events: none !important;
-  z-index: 3 !important;
+/* Sutil escurecimento da arte global sem pesar no compositor mobile. */
+.site-bg-shade {
   background:
     linear-gradient(90deg,
-      rgba(7,7,9,.84) 0%,
-      rgba(7,7,9,.50) 30%,
-      rgba(7,7,9,.18) 58%,
-      rgba(7,7,9,.10) 100%),
-    rgba(0,0,0,.12) !important;
+      rgba(7,7,9,.90) 0%,
+      rgba(7,7,9,.58) 30%,
+      rgba(7,7,9,.24) 58%,
+      rgba(7,7,9,.14) 100%),
+    rgba(0,0,0,.10) !important;
+}
+
+@media (max-width: 620px) {
+  .site-bg-shade {
+    background:
+      linear-gradient(90deg,
+        rgba(7,7,9,.86) 0%,
+        rgba(7,7,9,.62) 38%,
+        rgba(7,7,9,.24) 70%,
+        rgba(7,7,9,.14) 100%),
+      rgba(0,0,0,.12) !important;
+  }
 }
