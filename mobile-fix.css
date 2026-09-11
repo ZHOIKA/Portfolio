@@ -1,5 +1,4 @@
-/* Global cyber background: the cyborg stays fixed for the ENTIRE site.
-   All sections scroll above it. */
+/* Global cyber background: dedicated fixed layer to avoid mobile repaint/flicker. */
 
 html,
 body {
@@ -12,37 +11,43 @@ body {
   isolation: isolate;
 }
 
-/* The artwork is now global instead of being trapped inside the hero section. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("assets/cyborg.png");
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: auto 100vh;
-}
-
-/* Dark fade only on the left so text stays readable. */
-body::after {
-  content: "";
+/* Dedicated background layer. This avoids conflicts with body::before used by other UI effects. */
+.site-bg {
   position: fixed;
   inset: 0;
   z-index: 1;
+  overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgba(7,7,9,.96) 0%,
-    rgba(7,7,9,.82) 28%,
-    rgba(7,7,9,.38) 52%,
-    rgba(7,7,9,.08) 72%,
-    rgba(7,7,9,0) 100%
-  );
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: paint;
 }
 
-/* Real page content always stays above the fixed image. */
+.site-bg img {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  transform: translate3d(0,-50%,0);
+  -webkit-transform: translate3d(0,-50%,0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.site-bg-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Real page content always stays above the fixed artwork. */
 .topbar,
 main,
 footer {
@@ -58,20 +63,12 @@ footer {
   z-index: 9997;
 }
 
-.topbar {
-  z-index: 100;
-}
-
-.boot-screen {
-  z-index: 9998;
-}
-
+.topbar { z-index: 100; }
+.boot-screen { z-index: 9998; }
 .cursor-dot,
-.cursor-ring {
-  z-index: 9999;
-}
+.cursor-ring { z-index: 9999; }
 
-/* The old image element is disabled because the global background replaces it. */
+/* Old hero artwork is disabled: the dedicated global layer replaces it. */
 .hero-art {
   display: none !important;
 }
@@ -113,14 +110,12 @@ footer {
 .panel,
 .project-card {
   background-color: rgba(9,9,13,.78) !important;
-  backdrop-filter: blur(8px);
 }
 
 @media (min-width: 1001px) {
-  /* Full image visible from top to bottom on desktop, anchored to the right. */
-  body::before {
-    background-size: auto 100vh;
-    background-position: right center;
+  .site-bg img {
+    right: 0;
+    height: 100%;
   }
 
   .hero-copy {
@@ -134,23 +129,11 @@ footer {
 }
 
 @media (max-width: 1000px) {
-  body {
-    cursor: auto;
-  }
+  body { cursor: auto; }
 
-  body::before {
-    background-size: auto 100svh;
-    background-position: 76% center;
-  }
-
-  body::after {
-    background: linear-gradient(
-      90deg,
-      rgba(7,7,9,.90) 0%,
-      rgba(7,7,9,.70) 35%,
-      rgba(7,7,9,.24) 65%,
-      rgba(7,7,9,0) 100%
-    );
+  .site-bg img {
+    right: -8%;
+    height: 100%;
   }
 
   .hero {
@@ -171,19 +154,40 @@ footer {
 }
 
 @media (max-width: 620px) {
-  body::before {
-    background-size: auto 100svh;
-    background-position: 70% center;
+  /* Mobile Chrome can flash fixed backgrounds when blur/backdrop-filter forces repaints.
+     Keep the background on its own compositor layer and simplify translucent panels. */
+  .site-bg {
+    inset: 0;
+    contain: paint;
+    will-change: transform;
   }
 
-  body::after {
-    background: linear-gradient(
-      90deg,
-      rgba(7,7,9,.86) 0%,
-      rgba(7,7,9,.64) 42%,
-      rgba(7,7,9,.18) 72%,
-      rgba(7,7,9,0) 100%
-    );
+  .site-bg img {
+    right: -26%;
+    height: 100%;
+    transform: translate3d(0,-50%,0);
+    -webkit-transform: translate3d(0,-50%,0);
+  }
+
+  .topbar,
+  .terminal-card,
+  .panel,
+  .project-card,
+  .about-copy,
+  .contact-inner,
+  footer {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .topbar {
+    background: rgba(7,7,10,.96) !important;
+  }
+
+  .terminal-card,
+  .panel,
+  .project-card {
+    background: rgba(9,9,13,.90) !important;
   }
 
   .hero {
