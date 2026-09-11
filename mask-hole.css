@@ -1,8 +1,7 @@
 /*
  * Efeito "buraco/máscara" dos títulos.
- * A GirlPortrait.jpeg acompanha cada título durante o scroll, em vez de ficar presa à viewport.
- * Desktop: aparece no hover.
- * Mobile/touch: fica ativa por padrão.
+ * GirlPortrait.jpeg é revelada pelos glifos e acompanha o movimento da página.
+ * O deslocamento vertical é atualizado por JS com base na posição do título na viewport.
  */
 
 :root {
@@ -11,10 +10,10 @@
 
 .mask-hole {
   position: relative;
+  --mask-shift: 0px;
   transition: color .28s ease, text-shadow .28s ease, -webkit-text-stroke .28s ease;
 }
 
-/* Estilo que transforma os glifos numa janela para a segunda imagem. */
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   @media (hover: hover) and (pointer: fine) {
     .mask-hole:hover,
@@ -23,9 +22,9 @@
       -webkit-text-fill-color: transparent !important;
       background-image: var(--mask-art);
       background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center 28%;
-      background-attachment: scroll;
+      background-size: 115vw auto;
+      background-position: center calc(32% + var(--mask-shift));
+      background-attachment: scroll !important;
       -webkit-background-clip: text;
       background-clip: text;
       text-shadow: none !important;
@@ -38,7 +37,6 @@
     }
   }
 
-  /* Celular/tablet: não depende de :hover, então o recorte continua visível. */
   @media (hover: none), (pointer: coarse) {
     .mask-hole,
     .mask-hole > span {
@@ -46,9 +44,9 @@
       -webkit-text-fill-color: transparent !important;
       background-image: var(--mask-art);
       background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center 28%;
-      background-attachment: scroll;
+      background-size: 150vw auto;
+      background-position: center calc(30% + var(--mask-shift));
+      background-attachment: scroll !important;
       -webkit-background-clip: text;
       background-clip: text;
       text-shadow: none !important;
@@ -62,7 +60,6 @@
   }
 }
 
-/* Evita que estilos antigos dos spans pintem por cima do recorte. */
 .hero h1 .mask-hole,
 .section-heading h2.mask-hole,
 .contact h2.mask-hole,
@@ -71,7 +68,6 @@
   background-color: transparent;
 }
 
-/* Não altera layout nem transforma o título em botão/click. */
 .mask-hole {
   cursor: default;
   -webkit-tap-highlight-color: transparent;
@@ -80,5 +76,6 @@
 @media (prefers-reduced-motion: reduce) {
   .mask-hole {
     transition: none;
+    --mask-shift: 0px !important;
   }
 }
