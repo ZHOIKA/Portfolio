@@ -1,0 +1,60 @@
+<svg width="720" height="920" viewBox="0 0 720 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hair" x1="220" y1="90" x2="520" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F5F7"/>
+      <stop offset="1" stop-color="#B9B9C2"/>
+    </linearGradient>
+    <linearGradient id="coat" x1="260" y1="490" x2="510" y2="880" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17171D"/>
+      <stop offset="1" stop-color="#09090C"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="368" cy="390" r="260" stroke="#23232D" stroke-width="2"/>
+  <circle cx="368" cy="390" r="216" stroke="#2D2D37" stroke-dasharray="7 12"/>
+  <path d="M104 396H635" stroke="#202028"/>
+  <path d="M367 124V708" stroke="#202028"/>
+
+  <path d="M231 337C231 191 321 116 419 128C510 138 555 230 535 343C522 415 473 484 387 497C304 510 231 441 231 337Z" fill="#EDEDF0" stroke="#111118" stroke-width="7"/>
+  <path d="M243 314C247 181 326 107 434 128C501 141 541 191 554 251C501 217 467 220 436 226C387 235 328 212 287 238C271 249 254 274 243 314Z" fill="url(#hair)" stroke="#111118" stroke-width="7"/>
+  <path d="M248 249C229 322 240 404 273 449C232 425 205 378 205 320C205 257 233 193 287 157C258 190 246 219 248 249Z" fill="#D6D6DC" stroke="#111118" stroke-width="7"/>
+  <path d="M516 216C557 250 576 303 567 353C560 395 538 428 502 454C527 404 535 354 522 311C513 281 499 254 473 233L516 216Z" fill="#C7C7CF" stroke="#111118" stroke-width="7"/>
+
+  <path d="M311 327C333 309 357 310 379 327" stroke="#111118" stroke-width="7" stroke-linecap="round"/>
+  <path d="M424 327C447 309 473 310 492 330" stroke="#111118" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="348" cy="347" rx="18" ry="26" fill="#15151B"/>
+  <ellipse cx="460" cy="347" rx="18" ry="26" fill="#15151B"/>
+  <circle cx="354" cy="339" r="6" fill="#F5F5F7"/>
+  <circle cx="466" cy="339" r="6" fill="#F5F5F7"/>
+  <path d="M404 352L397 381L410 384" stroke="#6F6F78" stroke-width="4" stroke-linecap="round"/>
+  <path d="M368 416C389 430 419 431 443 416" stroke="#5D5D66" stroke-width="4" stroke-linecap="round"/>
+
+  <path d="M313 458C286 488 271 534 276 586L322 599L344 513L313 458Z" fill="#EAEAEC" stroke="#111118" stroke-width="7"/>
+  <path d="M452 467C486 505 502 550 499 597L449 607L420 517L452 467Z" fill="#EAEAEC" stroke="#111118" stroke-width="7"/>
+  <path d="M266 555C316 518 470 518 521 561C559 594 580 681 594 886H181C195 696 211 596 266 555Z" fill="url(#coat)" stroke="#111118" stroke-width="8"/>
+  <path d="M332 527L395 609L461 525L492 552L431 663L365 663L299 555L332 527Z" fill="#F2F2F3" stroke="#111118" stroke-width="7"/>
+  <path d="M397 610L433 663L401 841L365 663L397 610Z" fill="#FF3158"/>
+  <path d="M279 585L218 740" stroke="#31313A" stroke-width="8"/>
+  <path d="M515 584L570 754" stroke="#31313A" stroke-width="8"/>
+
+  <path d="M582 191H640V249" stroke="#FF3158" stroke-width="4"/>
+  <path d="M144 720H87V663" stroke="#8F5CFF" stroke-width="4"/>
+  <circle cx="621" cy="211" r="5" fill="#C8FF4A" filter="url(#glow)"/>
+  <circle cx="101" cy="692" r="5" fill="#FF3158" filter="url(#glow)"/>
+
+  <g font-family="monospace" font-size="14" fill="#777784">
+    <text x="545" y="278">ID: ZK-01</text>
+    <text x="552" y="298">SYNC: 98%</text>
+    <text x="105" y="624">NEURAL</text>
+    <text x="105" y="644">LINK // ON</text>
+  </g>
+  <g stroke="#2D2D36" stroke-width="2">
+    <path d="M556 314H634"/>
+    <path d="M556 322H608"/>
+    <path d="M109 661H178"/>
+  </g>
+</svg>
