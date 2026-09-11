@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070709" />
+  <meta name="description" content="Portfólio de Davi Gomes — desenvolvimento, cybersegurança e tecnologia." />
+  <title>ZHOIKA // Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <div id="boot" class="boot-screen" aria-hidden="true">
+    <div class="boot-inner">
+      <span class="boot-logo">ZHOIKA_OS</span>
+      <div class="boot-log" id="bootLog"></div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand scramble" href="#home" data-text="ZHOIKA">ZHOIKA</a>
+    <nav class="nav">
+      <a href="#about">ABOUT</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+    <div class="system-status"><span class="status-dot"></span> SYSTEM ONLINE</div>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-grid"></div>
+      <div class="hero-copy reveal">
+        <div class="eyebrow">[ PORTFOLIO // 2026 ]</div>
+        <h1>
+          <span class="muted">DAVi</span><br>
+          <span class="glitch" data-text="GOMES">GOMES</span>
+        </h1>
+        <p class="hero-role">Cybersecurity <span>//</span> Developer <span>//</span> Student</p>
+        <p class="hero-text">Transformando curiosidade em código, interfaces e experiências digitais com personalidade.</p>
+        <div class="hero-actions">
+          <a class="btn primary magnetic" href="#projects">EXPLORE_PROJECTS <span>↗</span></a>
+          <a class="btn ghost magnetic" href="https://github.com/ZHOIKA" target="_blank" rel="noreferrer">GITHUB</a>
+        </div>
+      </div>
+
+      <div class="hero-art reveal">
+        <div class="art-orbit orbit-a"></div>
+        <div class="art-orbit orbit-b"></div>
+        <img src="assets/anime-cyber.svg" alt="Ilustração original em estilo anime cyberpunk" />
+        <div class="hud hud-top">TARGET // ZK_01</div>
+        <div class="hud hud-left">LATENCY 08ms<br>TRACE // ACTIVE</div>
+        <div class="hud hud-right">SECURITY<br><strong>ENABLED</strong></div>
+      </div>
+
+      <div class="terminal-card reveal" data-tilt>
+        <div class="window-bar">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <span>zhoika@portfolio:~</span>
+          <span>×</span>
+        </div>
+        <div class="terminal-body" id="heroTerminal"></div>
+      </div>
+
+      <div class="scroll-cue">SCROLL_TO_EXPLORE <span>↓</span></div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="section-index reveal">01 //</div>
+      <div class="section-heading reveal">
+        <span class="kicker">IDENTITY_FILE</span>
+        <h2>SOBRE <span>MIM</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel reveal" data-tilt>
+          <div class="panel-label">PROFILE.JSON</div>
+          <pre><code>{
+  "name": "Davi Gomes",
+  "alias": "ZHOIKA",
+  "focus": [
+    "Cybersecurity",
+    "Development",
+    "Creative Technology"
+  ],
+  "status": "always learning"
+}</code></pre>
+        </article>
+
+        <div class="about-copy reveal">
+          <p>Sou estudante de informática e curto transformar ideias em projetos que misturam <strong>tecnologia, visual e experimentação</strong>.</p>
+          <p>Meu foco passa por desenvolvimento, Linux, segurança web, automações, bots e interfaces que fogem do padrão.</p>
+          <div class="quote">“BUILD // BREAK // LEARN // REPEAT”</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <div class="section-index reveal">02 //</div>
+      <div class="section-heading reveal">
+        <span class="kicker">SELECTED_WORK</span>
+        <h2>PROJETOS <span>EM DESTAQUE</span></h2>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal" data-tilt>
+          <div class="project-no">P_01</div>
+          <div class="project-topline"><span>ANDROID</span><span>SECURITY</span></div>
+          <h3>ZYRO</h3>
+          <p>Projeto Android com identidade própria, customização visual e foco em evolução técnica.</p>
+          <div class="tags"><span>Kotlin</span><span>Android</span><span>Security</span></div>
+          <a href="https://github.com/ZHOIKA/Zyro" target="_blank" rel="noreferrer">OPEN_REPOSITORY ↗</a>
+        </article>
+
+        <article class="project-card reveal" data-tilt>
+          <div class="project-no">P_02</div>
+          <div class="project-topline"><span>BOT</span><span>DISCORD</span></div>
+          <h3>FSOCIETY BOT</h3>
+          <p>Bot para comunidade com comandos, sistemas internos e uma estética inspirada em cultura hacker.</p>
+          <div class="tags"><span>Python</span><span>Discord</span><span>Automation</span></div>
+          <a href="https://github.com/ZHOIKA" target="_blank" rel="noreferrer">VIEW_PROFILE ↗</a>
+        </article>
+
+        <article class="project-card featured reveal" data-tilt>
+          <div class="project-no">P_03</div>
+          <div class="project-topline"><span>WEB</span><span>EDUCATION</span></div>
+          <h3>BIOAVES</h3>
+          <p>Plataforma web com análise inteligente e experiência visual voltada a um projeto educacional.</p>
+          <div class="tags"><span>Web</span><span>AI</span><span>Netlify</span></div>
+          <a href="https://bioaves.netlify.app" target="_blank" rel="noreferrer">OPEN_PROJECT ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section skills">
+      <div class="section-index reveal">03 //</div>
+      <div class="section-heading reveal">
+        <span class="kicker">SYSTEM_CAPABILITIES</span>
+        <h2>STACK <span>& SKILLS</span></h2>
+      </div>
+
+      <div class="skills-layout">
+        <div class="skills-terminal panel reveal">
+          <div class="panel-label">/usr/bin/skills</div>
+          <div id="skillsTerminal" class="skill-lines"></div>
+        </div>
+        <div class="skill-cloud reveal">
+          <span>PYTHON</span><span>JAVA</span><span>JAVASCRIPT</span><span>LINUX</span>
+          <span>GIT</span><span>HTML/CSS</span><span>TAILWIND</span><span>NODE.JS</span>
+          <span>WEB SECURITY</span><span>OSINT</span><span>NETWORKING</span><span>ANDROID</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="contact-inner reveal">
+        <span class="kicker">04 // ESTABLISH_CONNECTION</span>
+        <h2>VAMOS CRIAR<br><span>ALGO INSANO?</span></h2>
+        <p>Projetos, ideias, código ou colaboração. A conexão começa daqui.</p>
+        <a class="btn primary magnetic" href="https://github.com/ZHOIKA" target="_blank" rel="noreferrer">CONNECT_ON_GITHUB ↗</a>
+      </div>
+      <div class="big-code">&lt;/ZK&gt;</div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 ZHOIKA</span>
+    <span>DESIGNED // CODED // ONLINE</span>
+    <span id="clock">00:00:00</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
