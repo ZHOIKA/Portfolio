@@ -1,6 +1,7 @@
 (() => {
   const sections = [...document.querySelectorAll('main section[id]')];
   const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const maskTitles = [...document.querySelectorAll('.mask-hole')];
 
   const progress = document.createElement('div');
   progress.className = 'scroll-progress';
@@ -33,6 +34,30 @@
     progressBar.style.width = `${Math.min(100, Math.max(0, value))}%`;
   }
 
+  function updateMaskScroll() {
+    if (!maskTitles.length) return;
+
+    const vh = window.innerHeight || 1;
+    maskTitles.forEach(title => {
+      const rect = title.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const normalized = (center - vh / 2) / vh;
+      const shift = Math.max(-90, Math.min(90, normalized * 150));
+      title.style.setProperty('--mask-shift', `${shift.toFixed(1)}px`);
+    });
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateProgress();
+      updateMaskScroll();
+      ticking = false;
+    });
+  }
+
   const observer = new IntersectionObserver(entries => {
     const visible = entries
       .filter(entry => entry.isIntersecting)
@@ -46,8 +71,12 @@
   sections.forEach(section => observer.observe(section));
   setActive(sections[0]?.id || 'home');
   updateProgress();
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
+  updateMaskScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    updateProgress();
+    updateMaskScroll();
+  });
 
   // Pequeno efeito de foco nos cards, sem atrapalhar touch/mobile.
   if (matchMedia('(pointer:fine)').matches) {
